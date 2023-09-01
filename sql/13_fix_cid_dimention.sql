@@ -1,0 +1,2 @@
+UPDATE dim_cid AS dc SET categoria = subquery.descricao FROM (SELECT v.pk_cid as PK_cid, g.descricao FROM dim_cid v JOIN rel_cid_categorias g ON FLOOR(v.codigo) = g.codigo AND v.tipo = g.tipo) AS subquery WHERE dc.pk_cid = subquery.PK_cid;
+UPDATE dim_cid AS dc SET grupo = subquery.grupo_descricao FROM (SELECT v.pk_cid as PK_cid, g.grupo_descricao FROM dim_cid v JOIN rel_cid_grupos g ON v.codigo BETWEEN g.inicio AND g.fim AND v.tipo = g.grupo_tipo) AS subquery WHERE dc.pk_cid = subquery.PK_cid;
